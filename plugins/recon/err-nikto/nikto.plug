@@ -1,0 +1,9 @@
+[Core]
+Name = Nikto Wrapper
+Module = nikto
+
+[Documentation]
+Description = This plugin will allow you to nikto a server and post the results in slack.
+
+[Python]
+Version = 3

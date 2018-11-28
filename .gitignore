@@ -1,0 +1,9 @@
+data
+.vscode
+__pycache__
+errbot.log
+.local
+.cache
+*pyc
+.idea*
+.env

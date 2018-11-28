@@ -1,0 +1,9 @@
+[Core]
+Name = HashID
+Module = hashid
+
+[Documentation]
+Description = This plugin will allow you to use hashid from slack
+
+[Python]
+Version = 3

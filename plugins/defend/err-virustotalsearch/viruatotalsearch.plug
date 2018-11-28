@@ -1,0 +1,9 @@
+[Core]
+Name = virustotalsearch
+Module = virustotalsearch
+
+[Documentation]
+Description = A plugin to submit queries to virustotal.
+
+[Python]
+Version = 3

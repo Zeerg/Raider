@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  
+  raider:
+    image: raider:latest
+    ports:
+      - "3141:3141"
+    networks:
+      - backend
+    
+
+networks:
+  backend:
+    driver: bridge

@@ -1,0 +1,9 @@
+[Core]
+Name = Nmap Wrapper
+Module = nmap
+
+[Documentation]
+Description = This plugin will allow you to nmap a server and post the results in slack.
+
+[Python]
+Version = 3
