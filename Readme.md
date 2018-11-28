@@ -27,6 +27,7 @@ wip
 # ToDo
 * Add some kind of plugin manager system so it doesn't bloat the image, maybe an env
 * Add GCE integration
+* queue system for concurrent testing - spot instances in gce cluster or something
 * Add better slack messaging (message when scanning, then delete and send pretty logs when done + mention) (user configurable)
 * Add more tools
 * move api keys to some param store
