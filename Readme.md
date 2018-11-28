@@ -30,6 +30,7 @@ wip
 * queue system for concurrent testing - spot instances in gce cluster or something
 * Add better slack messaging (message when scanning, then delete and send pretty logs when done + mention) (user configurable)
 * Add more tools
+* firecracker integration eventually maybe
 * move api keys to some param store
 * Add ability to use public proxys for sites that block tor
 * elasticsearch integration
