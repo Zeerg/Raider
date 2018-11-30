@@ -1,0 +1,9 @@
+[Core]
+Name = UPNP Tester
+Module = upnp
+
+[Documentation]
+Description = This plugin will test a remote IP for UPnP misconfigurations.
+
+[Python]
+Version = 3
