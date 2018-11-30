@@ -35,4 +35,3 @@ class Nmap(BotPlugin):
             output, error = process.communicate()
             output = output.decode('UTF-8')
             yield output
-
