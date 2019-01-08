@@ -13,7 +13,7 @@ class Nmap(BotPlugin):
         This bot command performs a basic nikto scan against a target
         Usage: !nikto --host <target>
         '''
-        yield "Starting Nikto Scan via Tor."
+        yield "Starting Nikto Scan via Tor. Results will arrive via PM"
         self._bot.add_reaction(msg, "hourglass")
         self._bot.add_reaction(msg, "thumbsup_all")
         bash_command = "proxychains nikto -h " + target
@@ -21,4 +21,3 @@ class Nmap(BotPlugin):
                                    stdout=subprocess.PIPE)
         output, error = process.communicate()
         output = output.decode('UTF-8')
-        yield output

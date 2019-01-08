@@ -19,5 +19,5 @@ class HashIDPlugin(BotPlugin):
         self._bot.add_reaction(msg, "hourglass")
         for match in hid.identifyHash(hash_str):
             matches += f"Match: {match.name}; Hashcat Mode: {match.hashcat}\n"
-        yield matches
+        self.send(msg.frm, matches)
         self._bot.remove_reaction(msg, "hourglass")

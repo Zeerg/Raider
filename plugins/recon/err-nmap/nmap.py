@@ -29,9 +29,9 @@ class Nmap(BotPlugin):
             elif scan_type == "udp":
                 bash_command = "proxychains nmap -F -sU " + ip
             self._bot.add_reaction(msg, "hourglass")
-            self._bot.add_reaction(msg, "thumbsup_all")
+            yield("Starting Nmap Scan Results Will Arrive Via PM")
             process = subprocess.Popen(bash_command.split(),
                                        stdout=subprocess.PIPE)
             output, error = process.communicate()
             output = output.decode('UTF-8')
-            yield output
+            self.send(msg.frm, output)
