@@ -21,23 +21,3 @@ Bring up with docker-compose
 Build image 
 
 `make build`
-
-wip
-
-# ToDo
-* Add some kind of plugin manager system so it doesn't bloat the image, maybe an env
-* Add GCE integration
-* queue system for concurrent testing - spot instances in gce cluster or something
-* Add better slack messaging (message when scanning, then delete and send pretty logs when done + mention) (user configurable)
-* Add more tools
-* firecracker integration eventually maybe
-* move api keys to some param store
-* Add ability to use public proxys for sites that block tor
-* elasticsearch integration
-
-## Tools to add
-
-* https://github.com/woj-ciech/Danger-zone
-* Massscan
-* nfosec news crawler from riskdiscovery.com
-* Some kind of dos/load tool? Maybe vegeta 
