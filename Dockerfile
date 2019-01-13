@@ -12,7 +12,14 @@ RUN apt-get update -y && \
         nikto \
         git \
         build-essential \
+        wget \
+        unzip \
     && apt-get clean && apt-get autoremove
+
+# Install Terraform
+RUN wget "https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip" \
+    && unzip terraform_0.11.11_linux_amd64.zip \
+    && mv terraform /usr/local/bin/
 
 # Install proxychains-ng
 RUN cd /tmp && git clone https://github.com/rofl0r/proxychains-ng.git && cd proxychains-ng \
@@ -21,7 +28,7 @@ RUN cd /tmp && git clone https://github.com/rofl0r/proxychains-ng.git && cd prox
     && rm -rf /tmp/proxychains-ng && ln -s /usr/bin/proxychains4 /usr/bin/proxychains
 
 # save precious space
-RUN apt-get remove -y build-essential git
+RUN apt-get remove -y build-essential git unzip wget
 
 # don't run as root
 RUN groupadd --gid 1001 app

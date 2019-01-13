@@ -5,7 +5,8 @@ from errbot import BotPlugin, arg_botcmd
 
 class Upnp(BotPlugin):
     '''
-    usage: !upnp --ip <ip_to_test>
+    This UPNP scan will send upnp probes to public hosts looking for devices that respond to M-SEARCH requests.
+    Usage: !upnp --ip <ip_to_test>
     '''
 
     @arg_botcmd('--ip', dest='ip', type=str)
