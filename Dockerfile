@@ -14,6 +14,7 @@ RUN apt-get update -y && \
         build-essential \
         wget \
         unzip \
+        ssh \
     && apt-get clean && apt-get autoremove
 
 # Install Terraform
