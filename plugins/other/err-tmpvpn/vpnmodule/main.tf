@@ -20,7 +20,6 @@ resource "digitalocean_droplet" "vpn" {
   user_data = <<EOF
 #!/bin/bash
 apt-get update
-apt-get upgrade -y
 apt-get install docker docker.io -y
 docker volume create --name ovpn-data-dir
 export IP_ADDRESS=$(ifconfig eth0 | grep "inet " | awk '{print $2}')
@@ -31,8 +30,8 @@ docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvp
 docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvpn /bin/bash -c "openvpn --genkey --secret /etc/openvpn/pki/ta.key"
 docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvpn /bin/bash -c "easyrsa build-server-full $${IP_ADDRESS} nopass"
 docker run -v ovpn-data-dir:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn
-docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm -it kylemanna/openvpn easyrsa build-client-full tmpvpn nopass
-docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm kylemanna/openvpn ovpn_getclient tmpvpn > /tmp/tmpvpn.ovpn
+docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvpn easyrsa build-client-full tmpvpn nopass
+docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvpn ovpn_getclient tmpvpn > /tmp/tmpvpn.ovpn
 EOF
 }
 
