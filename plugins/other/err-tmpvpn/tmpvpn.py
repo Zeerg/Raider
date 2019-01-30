@@ -1,10 +1,14 @@
 import paramiko
+import requests
+import base64
+import json
+import os
 
-from errbot import BotPlugin, arg_botcmd
-from os import getenv
 from cryptography.hazmat.primitives import serialization as crypto_serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.backends import default_backend as crypto_default_backend
+from time import time
+from errbot import BotPlugin, arg_botcmd
 
 
 class TmpVpn(BotPlugin):
@@ -12,9 +16,35 @@ class TmpVpn(BotPlugin):
     Temp VPN helper plugins.
     '''
     def check_limit(self):
+
         pass
-    def start_vpn(self):
-        pass
+
+    def start_vpn(self, region, ssh_key=None):
+        api_url = 'https://api.digitalocean.com/v2/droplets'
+        user_data_file = open("/app/plugins/err-tmpvpn/user_data")
+        user_data = user_data_file.read()
+        do_token = "Bearer " + os.getenv("DIGITAL_OCEAN_KEY")
+        headers = {
+            "Authorization": do_token,
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "name": "vpn-" + str(time()),
+            "region": "nyc3",
+            "size": "s-1vcpu-1gb",
+            "image": "ubuntu-18-04-x64",
+            "ssh_keys": None,
+            "backups": False,
+            "ipv6": True,
+            "user_data": user_data,
+            "private_networking": None,
+            "volumes": None,
+            "tags": [
+                "vpn"
+            ]
+        }
+        api_call = requests.post(api_url, json=payload, headers=headers)
+        return api_call
 
     def generate_key(self):
         key_list = []
@@ -53,13 +83,15 @@ class TmpVpn(BotPlugin):
         Usage: !temp_vpn --region <do_region>
         This command will create a temp vpn and place it in the digital ocean region
         '''
-        do_token = getenv("DIGITAL_OCEAN_KEY")
         server_ip = "123.123.123.123"
         self.check_limit()
         self.send(msg.frm, "Starting VPN build")
         keys = self.generate_key()
-        config = self.get_remote_config(server_ip, keys[1])
-        self.send(msg.frm, config)
+        post_output = self.start_vpn("ams3")
+        self.send(msg.frm, post_output.text)
+        self.send(msg.frm, post_output.json())
+        #config = self.get_remote_config(server_ip, keys[1])
+        #self.send(msg.frm, config)
 
     def destroy_vpns(self, msg):
         '''

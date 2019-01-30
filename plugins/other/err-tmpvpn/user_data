@@ -1,23 +1,3 @@
-variable "do_token" {}
-variable "region" {}
-
-# Configure the DigitalOcean Provider
-provider "digitalocean" {
-  token = "${var.do_token}"
-}
-
-# Create a new SSH key
-data "digitalocean_ssh_key" "commodore" {
-  name = "Commodore"
-}
-
-resource "digitalocean_droplet" "vpn" {
-  image  = "ubuntu-18-04-x64"
-  name   = "vpn-${sha256(timestamp())}"
-  region = "${var.region}"
-  size   = "s-1vcpu-1gb"
-  ssh_keys = ["${data.digitalocean_ssh_key.commodore.fingerprint}"]
-  user_data = <<EOF
 #!/bin/bash
 apt-get update
 apt-get install docker docker.io -y
@@ -32,10 +12,3 @@ docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvp
 docker run -v ovpn-data-dir:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn
 docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvpn easyrsa build-client-full tmpvpn nopass
 docker run -v ovpn-data-dir:/etc/openvpn --log-driver=none --rm kylemanna/openvpn ovpn_getclient tmpvpn > /tmp/tmpvpn.ovpn
-EOF
-}
-
-
-output "droplet_ip" {
-  value = "${digitalocean_droplet.vpn.ipv4_address}"
-}

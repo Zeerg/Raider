@@ -17,11 +17,6 @@ RUN apt-get update -y && \
         ssh \
     && apt-get clean && apt-get autoremove
 
-# Install Terraform
-RUN wget "https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip" \
-    && unzip terraform_0.11.11_linux_amd64.zip \
-    && mv terraform /usr/local/bin/
-
 # Install proxychains-ng
 RUN cd /tmp && git clone https://github.com/rofl0r/proxychains-ng.git && cd proxychains-ng \
     && ./configure --prefix=/usr --sysconfdir=/etc \
