@@ -1,0 +1,8 @@
+[Core]
+Name = Temp VPN
+Module = tmpvpn
+
+[Documentation]
+Description = This plugin will build a temp vpn in the region specified and return the openvpn config to the user.
+[Python]
+Version = 3

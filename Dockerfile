@@ -12,6 +12,9 @@ RUN apt-get update -y && \
         nikto \
         git \
         build-essential \
+        wget \
+        unzip \
+        ssh \
     && apt-get clean && apt-get autoremove
 
 # Install proxychains-ng
@@ -21,7 +24,7 @@ RUN cd /tmp && git clone https://github.com/rofl0r/proxychains-ng.git && cd prox
     && rm -rf /tmp/proxychains-ng && ln -s /usr/bin/proxychains4 /usr/bin/proxychains
 
 # save precious space
-RUN apt-get remove -y build-essential git
+RUN apt-get remove -y build-essential git unzip wget
 
 # don't run as root
 RUN groupadd --gid 1001 app

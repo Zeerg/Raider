@@ -1,8 +1,12 @@
 # Raider
 
+An offensive and defensive chat bot for automating blue and red team tasks.
+
 ## Usage
+
 Config File
-* An .env config file must be created and placed in the config/ directory
+* An .env config file must be created and placed in the config/ directory before building the container
+
 ```
 # App config
 SLACK_API_KEY="Changeme"
@@ -12,6 +16,10 @@ LOG_LEVEL=INFO
 
 # VT configs
 VT_API_KEY=''
+
+# Digital Ocean API Config
+DIGITAL_OCEAN_KEY=''
+MAX_VPNS=2
 ```
 
 Bring up with docker-compose
