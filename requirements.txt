@@ -1,5 +1,5 @@
 errbot==6.1.2
-slackclient==2.5.0
+slackclient==2.7.0
 hashid==3.1.4
 paramiko
 requests
