@@ -1,4 +1,4 @@
-errbot==6.1.7
+errbot==6.1.8
 slackclient==2.9.3
 hashid==3.1.4
 paramiko
